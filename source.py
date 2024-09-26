@@ -27,7 +27,7 @@ class GameInteface:
 
     @staticmethod
     def game_interface(game_description:str, game_fuction:Callable):
-        """Общий интерфейс для всех игр, сама функции игры передается аргументом и вызывается в 21 строчке"""
+        """Общий интерфейс для всех игр, сама функции игры передается аргументом и вызывается в 34 строчке"""
         user_name = GameInteface.greeting()
         print(game_description)
         for i in range(3):
