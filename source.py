@@ -14,7 +14,7 @@ class GameInteface:
         return name
     
     @staticmethod
-    def check_answer(correct_answer, user_answer, user_name:str, i:int) -> bool:
+    def check_answer(correct_answer, user_answer, user_name:str) -> bool:
         """Функция сравнивает правильный ответ и пользователя, выводит соответствующие строки"""
         print(f"Your answer: {user_answer}")
         if int(user_answer) == int(correct_answer):
@@ -27,17 +27,30 @@ class GameInteface:
 
     @staticmethod
     def game_interface(game_description:str, game_fuction:Callable):
-        """Общий интерфейс для всех игр, сама функции игры передается аргументом и вызывается в 34 строчке"""
+        """Общий интерфейс для всех игр, сама функции игры передается аргументом и вызывается в 39 строчке. Всего три раунда по три вопроса в каждом"""
         user_name = GameInteface.greeting()
         print(game_description)
+
+        def one_round() -> bool:
+            for j in range(3):
+                question_string, correct_answer = game_fuction()
+                print(f"Question: {question_string}")
+                user_answer = input()
+                answer = GameInteface.check_answer(correct_answer, user_answer, user_name)
+                if answer is False: #если пользователь дал неверный ответ, то три раунда заново
+                    return False
+            return True
+
         for i in range(3):
-            question_string, correct_answer = game_fuction()
-            print(f"Question: {question_string}")
-            user_answer = input()
-            answer = GameInteface.check_answer(correct_answer, user_answer, user_name, i)
-            if not answer: #если пользователь дал неверный ответ, то три раунда заново
-                i = 0
-        print("Congratulations!")
+            win = one_round()
+            if win:
+                print("Congratulations!")
+                return
+        print("You lost 3 rounds")
+            
+            
+
+            
 
 GameInteface.game_interface("Find the smallest common multiple of given numbers.", nok_game)
 GameInteface.game_interface("What number is missing in the progression?", geometry_progression)
