@@ -45,7 +45,7 @@ class GameInteface:
 
     @staticmethod
     def game_interface(game_description: str, game_fuction: Callable):
-        """Общий интерфейс для всех игр, сама функции игры передается аргументом и вызывается в 39 строчке. Всего три раунда по три вопроса в каждом"""
+        """Общий интерфейс для всех игр, сама функции игры передается аргументом и вызывается в 36 строчке. Всего три раунда по три вопроса в каждом"""
         user_name = GameInteface.greeting()
         print(game_description)
         for i in range(3):
