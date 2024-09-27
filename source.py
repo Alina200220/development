@@ -1,6 +1,10 @@
 from typing import Callable
 
-from games import geometry_progression, nok_game
+from games.nok import nok_game
+from games.progression import geometry_progression
+
+#from games import geometry_progression, nok_game
+
 
 
 class GameInteface:
