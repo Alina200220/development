@@ -24,33 +24,30 @@ class GameInteface:
             print(f"{user_answer} is wrong answer ;(. Correct answer was {correct_answer}.")
             print(f"Let's try again, {user_name}")
             return False
+    
+    @staticmethod
+    def one_round(user_name:str, game_fuction:Callable) -> bool:
+        for j in range(3):
+            question_string, correct_answer = game_fuction()
+            print(f"Question: {question_string}")
+            user_answer = input()
+            answer = GameInteface.check_answer(correct_answer, user_answer, user_name)
+            if answer is False: #если пользователь дал неверный ответ, то три раунда заново
+                return False
+        return True
 
     @staticmethod
     def game_interface(game_description:str, game_fuction:Callable):
         """Общий интерфейс для всех игр, сама функции игры передается аргументом и вызывается в 39 строчке. Всего три раунда по три вопроса в каждом"""
         user_name = GameInteface.greeting()
         print(game_description)
-
-        def one_round() -> bool:
-            for j in range(3):
-                question_string, correct_answer = game_fuction()
-                print(f"Question: {question_string}")
-                user_answer = input()
-                answer = GameInteface.check_answer(correct_answer, user_answer, user_name)
-                if answer is False: #если пользователь дал неверный ответ, то три раунда заново
-                    return False
-            return True
-
         for i in range(3):
-            win = one_round()
+            win = GameInteface.one_round(user_name, game_fuction)
             if win:
                 print("Congratulations!")
                 return
         print("You lost 3 rounds")
-            
-            
-
-            
+                  
 
 GameInteface.game_interface("Find the smallest common multiple of given numbers.", nok_game)
 GameInteface.game_interface("What number is missing in the progression?", geometry_progression)
