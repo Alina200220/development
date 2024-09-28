@@ -1,10 +1,6 @@
 from typing import Callable
 
-from games.nok import nok_game
-from games.progression import geometry_progression
-
 #from games import geometry_progression, nok_game
-
 
 
 class GameInteface:
@@ -54,11 +50,3 @@ class GameInteface:
                 print("Congratulations!")
                 return
         print("You lost 3 rounds")
-
-
-GameInteface.game_interface(
-    "Find the smallest common multiple of given numbers.", nok_game
-)
-GameInteface.game_interface(
-    "What number is missing in the progression?", geometry_progression
-)
